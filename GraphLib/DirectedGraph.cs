@@ -60,14 +60,15 @@ namespace GraphLib
             }
         }
     
-        public void Dijkstra<D>(D[,] matrix, int start) where D: INumber<D>
+        public void Dijkstra<D>(int start) where D: INumber<D>
         {
             // Gib Buckets
+            D[,] matrix = CreateAdjacencyMatrix<D>();
             D[] distance = new D[vertexCount];
             bool[] history = new bool[vertexCount];
             D inf = (D)Convert.ChangeType(int.MaxValue, typeof(D));
 
-            Console.WriteLine($"Infinity is {inf}");
+            Console.WriteLine($"\nInfinity is {inf}\n");
 
             // Fill me buckets
             for (int i = 0; i < vertexCount; i++)
@@ -102,7 +103,12 @@ namespace GraphLib
 
         private void PrintSolution<D>(D[] distance, int vertexCount) where D : INumber<D>
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Vertex\t\tDistance");
+
+            for (int i = 0;i < vertexCount;i++)
+            {
+                Console.WriteLine($"{activeVerticies[i].label}\t\t{distance[i]}");
+            }
         }
 
         private int MinDistance<D>(D[] distance, bool[] history) where D : INumber<D>
